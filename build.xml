@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir=".">
+  <target name="build.app">
+    <zip destfile="simple_time_tracker.zip">
+      <zipfileset dir="css" prefix="css"/>
+      <zipfileset dir="img" prefix="img"/>
+      <zipfileset dir="js" prefix="js"/>
+      <zipfileset file="manifest.json"  />
+      <zipfileset file="popup.html" />
+      <zipfileset file="readme.txt" />
+      <zipfileset file="stt128x128.png" />
+      <zipfileset file="stt32x32.png" />
+    </zip>
+  </target>  
+</project>

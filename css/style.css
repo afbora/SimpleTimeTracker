@@ -1,0 +1,255 @@
+@CHARSET "UTF-8";
+html {
+    width: 400px;
+    height: auto;
+}
+
+body {
+    font-family: Helvetica, Tahoma, sans-serif;
+    font-size: 11px;
+    padding: 0;
+    margin: 0 auto;
+    background: #fff;
+    overflow: scroll;
+}
+
+a {
+    text-decoration: none;
+    color: #555;
+}
+
+/* top bar
+----------------------------------------------------------------------------- */
+
+#bar {
+    padding: 0.8em 1em;
+    overflow: auto;
+    background: #f6f6f6;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#bar .reset-all {
+    float: right!important;
+    margin-left: 5px;
+}
+
+#bar .remove-all {
+    float: right!important;
+}
+
+#bar .create {
+    float: left!important;
+}
+
+#bar .export-all {
+    float: left!important;
+    margin-left: 5px;
+}
+
+#bar .remove-all span {
+    background: transparent url(../img/delete.png) 50% 50% no-repeat;
+    display: block;
+    width: 20px;
+    height: 28px;
+    float: left;
+    margin: 0 10px 0 0;
+}
+
+#bar .create span {
+    background: transparent url(../img/new.png) 50% 50% no-repeat;
+    display: block;
+    width: 16px;
+    height: 28px;
+    float: left;
+    margin: 0 10px 0 0;
+}
+
+/* buttons
+----------------------------------------------------------------------------- */
+
+input[type=button],
+input[type=submit],
+#bar a.button {
+    color: #444;
+    text-decoration: none;
+    display: block;
+    padding: 0 10px;
+    font-weight: bold;
+    line-height: 28px;
+    border-radius: 3px;
+    background-color: #fff;
+    border-radius: 2px;
+    float: left;
+    border: 1px solid #ddd;
+    position: relative;
+    cursor: pointer;
+}
+
+#bar a.button:active {
+    top: 1px;
+}
+
+input[type=button]:hover,
+input[type=submit]:hover,
+#bar .button:hover {
+    color: #555;
+}
+
+p.buttons {
+    padding: 1em 2em!important;
+    overflow: hidden;
+}
+
+.cancel {
+    float: right!important;
+}
+
+#button-remove-all,
+#button-remove-all,
+#button-remove {
+    color: #a90329;
+}
+
+/* forms and inputs
+----------------------------------------------------------------------------- */
+
+input[type=text] {
+    border: solid 1px #D6D6BE;
+    background-color: #fcfff4;
+    padding: 3px 5px;
+    width: 96%;
+    font-size: 16px;
+    -webkit-border-radius: 2px;
+    margin: 0 auto;
+    display: block;
+}
+
+input[type=text]:focus {
+    border: solid 1px #fff286;
+    background-color: #fff;
+}
+
+.form {
+    overflow-y: auto;
+}
+
+.form label {
+    width: calc(100% - 120px);
+    padding-right: 120px;
+    /* prevent timer clipping task name */
+    display: block;
+    font-weight: bold;
+    text-align: left;
+    font-size: 16px;
+}
+
+.form label small {
+    font-size: 10px !important;
+}
+
+/* content
+----------------------------------------------------------------------------- */
+
+#content {
+    overflow: hidden;
+    text-align: center!important;
+}
+
+#content p {
+    margin: 0;
+    padding: 10px;
+}
+
+/* item
+----------------------------------------------------------------------------- */
+
+.item {
+    text-align: left;
+    border-bottom: solid 1px #eee;
+    padding: 14px 12px!important;
+    position: relative;
+    background: #fff;
+    display: block;
+    overflow: hidden;
+}
+
+.item a.power {
+    right: 3px;
+    width: 72px;
+    padding-right: 16px;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: url(../img/play.png) right center no-repeat;
+    background-origin: content-box;
+}
+
+.item a.running {
+    background-image: url(../img/pause.png);
+}
+
+.item span.timer {
+    position: absolute;
+    right: 50px;
+    top: 28px;
+    font-size: 17px;
+}
+
+p.running {
+    background-color: #eaffd6;
+}
+
+/* other elements
+----------------------------------------------------------------------------- */
+
+p.notask label {
+    text-align: center;
+    padding: 0;
+    width: 100%;
+}
+
+a.update:hover {
+    color: #006e2e;
+}
+
+a.remove:hover {
+    color: #a90329;
+}
+
+p.remove-confirm {
+    color: #a90329;
+    font-weight: bold;
+    line-height: 1.2em;
+    margin: 0;
+    padding: 1em 0!important;
+    font-style: italic;
+    font-size: 13px;
+}
+
+p.remove-confirm strong {
+    color: #333;
+}
+
+#form-create {
+    margin: 0 5px;
+}
+
+/* footer
+----------------------------------------------------------------------------- */
+
+#footer {
+    background: #f6f6f6;
+    color: #bbb;
+    margin: 0;
+    padding: 5px;
+}
+
+#footer a {
+    color: #bbb;
+}
+
+#footer a:hover {
+    color: #333;
+}
