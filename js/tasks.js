@@ -137,7 +137,7 @@ var taskInterface = {
 			e.preventDefault();
 			$(".form").hide();
 			$("#button-remove").attr("rel", $(this).attr("rel"));
-			$("#remove-confirm").html("Are you sure? You want to <strong>delete " + $(this).attr("title") + "</strong>?");
+			$("#remove-confirm").html("Are you sure? You want to <strong>delete " + ($(this).data("name") ? $(this).data("name") : 'selected item') + "</strong>?");
 			$("#form-remove").show();
 		});
 
@@ -298,9 +298,9 @@ var taskInterface = {
 
 						out += '<p class="item' + (task.running == true ? ' running' : '') + '" id="item' + task.ID + '" rel="' + task.ID + '">';
 						out += '<label>' + task.name + '<br/><small>' + task.project_name + '</small></label>';
-						out += '<a href="#" class="update" rel="' + task.ID + '" title="Edit: ' + task.name + '">Edit</a> | ';
-						out += '<a href="#" class="reset" rel="' + task.ID + '" title="Reset: ' + task.name + '">Reset</a> | ';
-						out += '<a href="#" class="remove" rel="' + task.ID + '" title="Delete: ' + task.name + '">Delete</a>';
+						out += '<a href="#" class="update" rel="' + task.ID + '" title="Edit: ' + task.name + '" data-name="' + task.name + '">Edit</a> | ';
+						out += '<a href="#" class="reset" rel="' + task.ID + '" title="Reset: ' + task.name + '" data-name="' + task.name + '">Reset</a> | ';
+						out += '<a href="#" class="remove" rel="' + task.ID + '" title="Delete: ' + task.name + '" data-name="' + task.name + '">Delete</a>';
 
 						if (task.running == true) {
 							var start = new Date(task.start);

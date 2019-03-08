@@ -2,7 +2,7 @@
 "update_url":"http://clients2.google.com/service/update2/crx",
  "name": "Simple Time Tracker",
  "description": "Simple Time Tracker - How much time spend on tasks?",
- "version": "1.0.1",
+ "version": "1.0.2",
  "manifest_version": 2,
  "content_security_policy": "script-src 'self'; object-src 'self'",
  "icons": 
