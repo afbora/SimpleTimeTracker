@@ -253,3 +253,7 @@ p.remove-confirm strong {
 #footer a:hover {
     color: #333;
 }
+
+#footer span#total-time {
+    float: right;
+}

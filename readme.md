@@ -10,6 +10,9 @@ https://chrome.google.com/webstore/detail/simple-time-tracker/ifdmgpcchapjlldljf
 
 # CHANGELOG
 
+1.0.3
+- Added total time counter
+
 1.0.2
 - Fixed delete confirmations
 

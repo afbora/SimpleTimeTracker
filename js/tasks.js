@@ -45,10 +45,11 @@ var tasks = {
 	insert: function (id, project_name, name) {
 		db.transaction(function (tx) {
 			tx.executeSql("INSERT INTO tasks (id, project_name, name, time, start, running) VALUES (?, ?, ?, ?, ?, ?)", [id, project_name, name, 0, new Date(), false],
-					function (tx, result) {
-						taskInterface.index();
-					},
-					onError);
+                function (tx, result) {
+                    taskInterface.index();
+                    taskInterface.count();
+                },
+                onError);
 		});
 	},
 
@@ -59,11 +60,12 @@ var tasks = {
 	remove: function (id) {
 		db.transaction(function (tx) {
 			tx.executeSql("DELETE FROM tasks WHERE id=?", [id],
-					function (tx, result) {
-						window.clearInterval(taskInterface.intervals[id]);
-						taskInterface.index();
-					},
-					onError);
+                function (tx, result) {
+                    window.clearInterval(taskInterface.intervals[id]);
+                    taskInterface.index();
+                    taskInterface.count();
+                },
+                onError);
 		});
 	},
 
@@ -76,6 +78,7 @@ var tasks = {
 				}
 
 				taskInterface.index();
+				taskInterface.count();
 			}, onError);
 		});
 	},
@@ -84,6 +87,7 @@ var tasks = {
 		db.transaction(function (tx) {
 			tx.executeSql("UPDATE tasks SET time = ?", [0], function (tx, results) {
 				taskInterface.index();
+				taskInterface.count();
 			}, onError);
 		});
 	}
@@ -255,6 +259,7 @@ var taskInterface = {
 			db.transaction(function (tx) {
 				tx.executeSql("UPDATE tasks SET project_name = ?, name = ?, time = ? WHERE id = ?", [project_name, name, taskInterface.sec(time), id], function (tx, results) {
 					taskInterface.index();
+					taskInterface.count();
 				}, onError);
 			});
 		});
@@ -271,6 +276,7 @@ var taskInterface = {
 			db.transaction(function (tx) {
 				tx.executeSql("UPDATE tasks SET time = ? WHERE id = ?", [0 , id], function (tx, results) {
 					taskInterface.index();
+					taskInterface.count();
 				}, onError);
 			});
 
@@ -326,10 +332,34 @@ var taskInterface = {
 			}, null);
 		});
 	},
+    
+    count: function () {
+		var totalTime = 0;
+
+		db.transaction(function (tx) {
+			tx.executeSql('SELECT * FROM tasks ORDER BY id DESC', [], function (tx, results) {
+
+				var len = results.rows.length, i;
+
+				if (len > 0) 
+                {
+					for (i = 0; i < len; i++) 
+                    {
+						var task = results.rows.item(i);
+                        totalTime += task.time;
+					}
+				}
+                
+                $("#total-time-counter").html(taskInterface.hms(totalTime));
+
+			}, null);
+		});
+	},
 
 	init: function () {
 		this.bind();
 		this.index();
+		this.count();
 		this.toggleRunText();
 	},
 
@@ -348,8 +378,8 @@ var taskInterface = {
 						taskInterface.startTask(task);
 					}
 
+                    taskInterface.count();
 					taskInterface.toggleRunText();
-
 				} else {
 					alert("Task " + id + " not found sorry!");
 				}
