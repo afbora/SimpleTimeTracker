@@ -1,7 +1,6 @@
-@CHARSET "UTF-8";
 html {
-    width: 400px;
-    height: auto;
+    width: 500px;
+    max-height: 800px;
 }
 
 body {
@@ -18,35 +17,45 @@ a {
     color: #555;
 }
 
-/* top bar
+/* header
 ----------------------------------------------------------------------------- */
 
-#bar {
+.header {
     padding: 0.8em 1em;
     overflow: auto;
-    background: #f6f6f6;
+    color: #AAA;
     border-bottom: 1px solid #e0e0e0;
 }
 
-#bar .reset-all {
-    float: right!important;
+.header BUTTON {
+    _background: rgb(51, 103, 214);
+    background: #FFF;
+    color: #AAA;
+    height: 34px;
+    border: 1px solid #AAA;
+}
+
+.header .create,
+.header .history,
+.header .export-all {
+    float: left !important;
+}
+
+.header .export-all {
     margin-left: 5px;
 }
 
-#bar .remove-all {
-    float: right!important;
-}
-
-#bar .create {
-    float: left!important;
-}
-
-#bar .export-all {
-    float: left!important;
+.header .history {
     margin-left: 5px;
 }
 
-#bar .remove-all span {
+.header .reset-all,
+.header .remove-all {
+    float: right !important;
+    margin-left: 5px;
+}
+
+.header .remove-all .icon {
     background: transparent url(../img/delete.png) 50% 50% no-repeat;
     display: block;
     width: 20px;
@@ -55,60 +64,34 @@ a {
     margin: 0 10px 0 0;
 }
 
-#bar .create span {
+.header .create {
     background: transparent url(../img/new.png) 50% 50% no-repeat;
     display: block;
-    width: 16px;
-    height: 28px;
-    float: left;
-    margin: 0 10px 0 0;
+    width: 34px;
 }
 
-/* buttons
+.header .today {
+    border: 1px solid;
+    float: left;
+    height: 22px;
+    text-align: center;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.header .today-text {
+    width: 100%;
+    text-align: center;
+}
+
+
+/* forms and inputs
 ----------------------------------------------------------------------------- */
 
-input[type=button],
-input[type=submit],
-#bar a.button {
-    color: #444;
-    text-decoration: none;
-    display: block;
-    padding: 0 10px;
-    font-weight: bold;
-    line-height: 28px;
-    border-radius: 3px;
-    background-color: #fff;
-    border-radius: 2px;
-    float: left;
-    border: 1px solid #ddd;
-    position: relative;
-    cursor: pointer;
+.modal {
+
 }
 
-#bar a.button:active {
-    top: 1px;
-}
-
-input[type=button]:hover,
-input[type=submit]:hover,
-#bar .button:hover {
-    color: #555;
-}
-
-p.buttons {
-    padding: 1em 2em!important;
-    overflow: hidden;
-}
-
-.cancel {
-    float: right!important;
-}
-
-#button-remove-all,
-#button-remove-all,
-#button-remove {
-    color: #a90329;
-}
 
 /* forms and inputs
 ----------------------------------------------------------------------------- */
@@ -129,33 +112,15 @@ input[type=text]:focus {
     background-color: #fff;
 }
 
-.form {
-    overflow-y: auto;
-}
-
-.form label {
-    width: calc(100% - 120px);
-    padding-right: 120px;
-    /* prevent timer clipping task name */
-    display: block;
-    font-weight: bold;
-    text-align: left;
-    font-size: 16px;
-}
-
-.form label small {
-    font-size: 10px !important;
-}
-
 /* content
 ----------------------------------------------------------------------------- */
 
-#content {
+.content {
     overflow: hidden;
-    text-align: center!important;
+    text-align: center !important;
 }
 
-#content p {
+.content p {
     margin: 0;
     padding: 10px;
 }
@@ -201,59 +166,25 @@ p.running {
     background-color: #eaffd6;
 }
 
-/* other elements
------------------------------------------------------------------------------ */
-
-p.notask label {
-    text-align: center;
-    padding: 0;
-    width: 100%;
-}
-
-a.update:hover {
-    color: #006e2e;
-}
-
-a.remove:hover {
-    color: #a90329;
-}
-
-p.remove-confirm {
-    color: #a90329;
-    font-weight: bold;
-    line-height: 1.2em;
-    margin: 0;
-    padding: 1em 0!important;
-    font-style: italic;
-    font-size: 13px;
-}
-
-p.remove-confirm strong {
-    color: #333;
-}
-
-#form-create {
-    margin: 0 5px;
-}
 
 /* footer
 ----------------------------------------------------------------------------- */
 
-#footer {
-    background: #f6f6f6;
+.footer {
+    background: #FFF;
     color: #bbb;
     margin: 0;
     padding: 5px;
 }
 
-#footer a {
+.footer a {
     color: #bbb;
 }
 
-#footer a:hover {
+.footer a:hover {
     color: #333;
 }
 
-#footer span#total-time {
+.footer span#total-time {
     float: right;
 }
