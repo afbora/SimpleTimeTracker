@@ -1,8 +1,8 @@
 $(function () {
-	taskInterface.init();
+    taskInterface.init();
 
-	// show current version
-	$.getJSON(chrome.extension.getURL('/manifest.json'), function (manifest) {
-		$('#version').text(manifest.version);
-	});
+    // show current version
+    $.getJSON(chrome.runtime.getURL('/manifest.json'), function (manifest) {
+        $('#version').text(manifest.version);
+    });
 });

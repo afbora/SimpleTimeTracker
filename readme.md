@@ -10,6 +10,9 @@ https://chrome.google.com/webstore/detail/simple-time-tracker/ifdmgpcchapjlldljf
 
 # CHANGELOG
 
+2.0.0
+- Switched to IndexedDB from WebSQL
+
 1.0.3
 - Added total time counter
 
