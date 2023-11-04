@@ -1,5 +1,5 @@
 {
-  "update_url": "http://clients2.google.com/service/update2/crx",
+  "update_url": "https://clients2.google.com/service/update2/crx",
   "name": "Simple Time Tracker",
   "description": "Simple Time Tracker - How much time spend on tasks?",
   "version": "2.0.0",
