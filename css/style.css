@@ -18,6 +18,10 @@ a {
     color: #555;
 }
 
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
 /* top bar
 ----------------------------------------------------------------------------- */
 
@@ -29,20 +33,20 @@ a {
 }
 
 #bar .reset-all {
-    float: right!important;
+    float: right !important;
     margin-left: 5px;
 }
 
 #bar .remove-all {
-    float: right!important;
+    float: right !important;
 }
 
 #bar .create {
-    float: left!important;
+    float: left !important;
 }
 
 #bar .export-all {
-    float: left!important;
+    float: left !important;
     margin-left: 5px;
 }
 
@@ -76,7 +80,6 @@ input[type=submit],
     padding: 0 10px;
     font-weight: bold;
     line-height: 28px;
-    border-radius: 3px;
     background-color: #fff;
     border-radius: 2px;
     float: left;
@@ -96,12 +99,12 @@ input[type=submit]:hover,
 }
 
 p.buttons {
-    padding: 1em 2em!important;
+    padding: 1em !important;
     overflow: hidden;
 }
 
 .cancel {
-    float: right!important;
+    float: right !important;
 }
 
 #button-remove-all,
@@ -113,34 +116,45 @@ p.buttons {
 /* forms and inputs
 ----------------------------------------------------------------------------- */
 
-input[type=text] {
+input[type=text],
+textarea {
     border: solid 1px #D6D6BE;
     background-color: #fcfff4;
-    padding: 3px 5px;
-    width: 96%;
-    font-size: 16px;
+    padding: .25rem;
+    width: 100%;
+    font-size: 14px;
     -webkit-border-radius: 2px;
     margin: 0 auto;
     display: block;
+    resize: none;
 }
 
-input[type=text]:focus {
+input[type=text]:focus,
+textarea:focus {
     border: solid 1px #fff286;
     background-color: #fff;
 }
 
 .form {
     overflow-y: auto;
+    padding: .5rem;
+}
+
+.form > div {
+    margin-bottom: .75rem;
 }
 
 .form label {
-    width: calc(100% - 120px);
-    padding-right: 120px;
-    /* prevent timer clipping task name */
+    width: 100%;
     display: block;
     font-weight: bold;
     text-align: left;
-    font-size: 16px;
+    font-size: 14px;
+    margin-bottom: 0.1rem;
+}
+
+.form label.title {
+    margin-bottom: 0.2rem;
 }
 
 .form label small {
@@ -152,52 +166,53 @@ input[type=text]:focus {
 
 #content {
     overflow: hidden;
-    text-align: center!important;
-}
-
-#content p {
-    margin: 0;
-    padding: 10px;
+    text-align: center !important;
 }
 
 /* item
 ----------------------------------------------------------------------------- */
 
-.item {
+#form-list .item {
     text-align: left;
-    border-bottom: solid 1px #eee;
-    padding: 14px 12px!important;
+    padding: .75rem .5rem;
     position: relative;
     background: #fff;
     display: block;
     overflow: hidden;
 }
 
-.item a.power {
-    right: 3px;
+#form-list .item:not(:last-child) {
+    border-bottom: solid 1px #eee;
+}
+
+#form-list .item:last-child {
+    margin-bottom: 0;
+}
+
+#form-list .item a.power {
     width: 72px;
-    padding-right: 16px;
     display: block;
     position: absolute;
     top: 0;
-    right: 0;
+    right: .25rem;
     bottom: 0;
     background: url(../img/play.png) right center no-repeat;
     background-origin: content-box;
 }
 
-.item a.running {
+#form-list .item a.running {
     background-image: url(../img/pause.png);
 }
 
-.item span.timer {
+#form-list .item span.timer {
     position: absolute;
-    right: 50px;
-    top: 28px;
-    font-size: 17px;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
 }
 
-p.running {
+#form-list .running {
     background-color: #eaffd6;
 }
 
@@ -223,7 +238,7 @@ p.remove-confirm {
     font-weight: bold;
     line-height: 1.2em;
     margin: 0;
-    padding: 1em 0!important;
+    padding: 1em 0 !important;
     font-style: italic;
     font-size: 13px;
 }
@@ -256,4 +271,12 @@ p.remove-confirm strong {
 
 #footer span#total-time {
     float: right;
+}
+
+/* error
+----------------------------------------------------------------------------- */
+#form-error {
+    background-color: #f8d7da;
+    margin: .5rem .75rem;
+    font-size: .75rem;
 }

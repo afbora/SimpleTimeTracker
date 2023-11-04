@@ -1,86 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Simple Time Tracker Aplication for Chrome Extension</title>
-	<meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
-	<link rel="stylesheet" type="text/css" href="css/style.css"/>
-	<link rel="shortcut icon" type="image/ico" href="stt32x32.png"/>
+    <title>Simple Time Tracker Application for Chrome Extension</title>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="shortcut icon" type="image/ico" href="stt32x32.png">
 </head>
 <body>
-    <div id="holder">
-        <div id="bar">
-            <a href="#" class="create button"><span></span> New</a>
-            <a href="#" class="reset-all button"><span></span> Reset All</a>
-            <a href="#" class="remove-all button"><span></span> Delete All</a>
-            <a href="#" class="export-all button"><span></span> Export All</a>
+<div id="holder">
+    <div id="bar">
+        <a href="#" class="create button"><span></span> New</a>
+        <a href="#" class="reset-all button"><span></span> Reset All</a>
+        <a href="#" class="remove-all button"><span></span> Delete All</a>
+        <a href="#" class="export-all button"><span></span> Export All</a>
+    </div>
+    <div id="content">
+        <div id="form-list" class="form"></div>
+        <p id="form-error" class="form" style="display: none"></p>
+        <div id="form-create" class="form" style="display: none">
+            <div>
+                <label for="new-task-name">Task name</label>
+                <input type="text" name="task-name" id="new-task-name" class="text" required>
+            </div>
+            <div>
+                <label for="new-task-project">Project name</label>
+                <input type="text" name="task-project" id="new-task-project" class="text">
+            </div>
+            <div class="buttons">
+                <input type="button" id="button-create" value="Save">
+                <input type="button" id="form-create.cancel-button" class="cancel" rel="form-create" value="Cancel">
+            </div>
+            <p style="display: none" id="create-status"></p>
         </div>
-        <div id="content">
-            <div id="form-list" class="form"></div>
-            <div id="form-create" class="form" style="display: none">
-                <p>
-                    <label for="task-project-name">Project name</label>
-                    <input type="text" name="task-project-name" id="task-project-name" class="text"/>
-                </p>
-                <p>
-                    <label for="task-name">Task name</label>
-                    <input type="text" name="task-name" id="task-name" class="text"/>
-                </p>
-                <p class="buttons">
-                    <input type="button" id="button-create" value="Save"/>
-                    <input type="button" id="form-create.cancel-button" class="cancel" rel="form-create" value="Cancel"/>
-                </p>
-                <p style="display: none" id="create-status"></p>
+        <div id="form-update" class="form" style="display: none">
+            <input type="hidden" name="task-id" id="task-id" value>
+            <div>
+                <label for="task-name">Task name *</label>
+                <input type="text" name="task-name" id="task-name" class="text" required>
             </div>
-            <div id="form-update" class="form" style="display: none">
-                <input type="hidden" name="task-id" id="task-id" value=""/>
-                <p>
-                    <label for="task-project-name">Project name</label>
-                    <input type="text" name="task-project-name" id="task-project-name" class="text"/>
-                </p>
-                <p>
-                    <label for="task-name">Task name</label>
-                    <input type="text" name="task-name" id="task-name" class="text"/>
-                </p>
-                <p>
-                    <label for="task-time">Task time (sec)</label>
-                    <input type="text" name="task-time" id="task-time" class="text"/>
-                </p>
-                <p class="buttons">
-                    <input type="button" id="button-update" value="Update"/>
-                    <input type="button" id="form-update.cancel-button" class="cancel" rel="form-update" value="Cancel"/>
-                </p>
-                <p style="display: none" id="update-status"></p>
+            <div>
+                <label for="task-project">Project name</label>
+                <input type="text" name="task-project" id="task-project" class="text">
             </div>
-            <div id="form-remove" class="form" style="display: none">
-                <p id="remove-confirm" class="remove-confirm"></p>
-                <p class="buttons">
-                    <input type="button" id="button-remove" value="Delete"/>
-                    <input type="button" id="form-remove.cancel-button" class="cancel" rel="form-remove" value="Cancel"/>
-                </p>
+            <div>
+                <label for="task-time">Task time (sec)</label>
+                <input type="text" name="task-time" id="task-time" class="text">
             </div>
-            <div id="form-reset-all" class="form" style="display: none">
-                <p id="remove-all-confirm" class="remove-confirm">Are you sure you want to <strong>reset all tasks</strong>?</p>
-                <p class="buttons">
-                    <input type="button" id="button-reset-all" value="Yes"/>
-                    <input type="button" id="form-reset-all.cancel-button" class="cancel" rel="form-reset-all" value="Cancel"/>
-                </p>
+            <div>
+                <label for="task-rate">Hourly rate</label>
+                <input type="text" name="task-rate" id="task-rate" class="text">
             </div>
-            <div id="form-remove-all" class="form" style="display: none">
-                <p id="remove-all-confirm" class="remove-confirm">Are you sure you want to <strong>delete all tasks</strong>?</p>
-                <p class="buttons">
-                    <input type="button" id="button-remove-all" value="Yes"/>
-                    <input type="button" id="form-remove-all.cancel-button" class="cancel" rel="form-remove-all" value="Cancel"/>
-                </p>
+            <div>
+                <label for="task-notes">Notes</label>
+                <textarea name="task-notes" id="task-notes" class="textarea" rows="3"></textarea>
             </div>
+            <div class="buttons">
+                <input type="button" id="button-update" value="Update">
+                <input type="button" id="form-update.cancel-button" class="cancel" rel="form-update" value="Cancel">
+            </div>
+            <p style="display: none" id="update-status"></p>
         </div>
-        <div id="footer">
-            Dev <a href="http://www.ahmetbora.com/" title="Developer, Ahmet Bora" target="_blank">Ahmet Bora</a> | 
-            <a href="https://twitter.com/afbora" target="_blank">@afbora</a> v<span id="version"></span>
-            <span id="total-time">Total: <span id="total-time-counter"></span></span>
+        <div id="form-remove" class="form" style="display: none">
+            <p id="remove-confirm" class="remove-confirm"></p>
+            <p class="buttons">
+                <input type="button" id="button-remove" value="Delete">
+                <input type="button" id="form-remove.cancel-button" class="cancel" rel="form-remove" value="Cancel">
+            </p>
+        </div>
+        <div id="form-reset-all" class="form" style="display: none">
+            <p id="reset-all-confirm" class="remove-confirm">Are you sure you want to <strong>reset all tasks</strong>?
+            </p>
+            <p class="buttons">
+                <input type="button" id="button-reset-all" value="Yes">
+                <input type="button" id="form-reset-all.cancel-button" class="cancel" rel="form-reset-all"
+                       value="Cancel">
+            </p>
+        </div>
+        <div id="form-remove-all" class="form" style="display: none">
+            <p id="remove-all-confirm" class="remove-confirm">Are you sure you want to <strong>delete all tasks</strong>?
+            </p>
+            <p class="buttons">
+                <input type="button" id="button-remove-all" value="Yes">
+                <input type="button" id="form-remove-all.cancel-button" class="cancel" rel="form-remove-all"
+                       value="Cancel">
+            </p>
         </div>
     </div>
-    <script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
-    <script type="text/javascript" src="js/tasks.js"></script>
-    <script type="text/javascript" src="js/init.js"></script>
+    <div id="footer">
+        Developer <a href="https://github.com/afbora" title="Developer, Ahmet Bora" target="_blank">@afbora</a> | v<span
+            id="version"></span>
+        <span id="total-time">Total: <span id="total-time-counter"></span></span>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jsstore.min.js"></script>
+<script type="text/javascript" src="js/jsstore.worker.min.js"></script>
+<script type="text/javascript" src="js/tasks.js"></script>
+<script type="text/javascript" src="js/init.js"></script>
 </body>
 </html>
