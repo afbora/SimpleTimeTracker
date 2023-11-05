@@ -6,15 +6,14 @@
 // running - task is in progress now
 
 let tasks = {
-    insert: async function (name, project) {
+    insert: async function (item) {
         const task = {
-            name: name,
-            project: project,
             time: 0,
             start: new Date(),
             running: 0,
             rate: "",
-            notes: ""
+            notes: "",
+            ...item
         };
 
         await taskInterface.db.insert({
@@ -25,10 +24,10 @@ let tasks = {
         await taskInterface.reload();
     },
 
-    update: async function (set, where = {}) {
+    update: async function (item, where = {}) {
         const data = {
             in: "tasks",
-            set: set
+            set: item
         };
 
         if (Object.keys(where).length) {
@@ -127,22 +126,24 @@ let taskInterface = {
             if (results === 0) {
                 // open old db
                 let db = openDatabase('simpletimetracker', '', 'Simple Time tracker database', 2 * 1024 * 1024);
-                db.changeVersion('', '2.0', function (tx) {
+
+                // create table if not exists
+                db.transaction(function (tx) {
                     tx.executeSql('CREATE TABLE IF NOT EXISTS tasks(ID INTEGER PRIMARY KEY ASC, project_name TEXT, name TEXT, time INTEGER, start DATETIME, running BOOLEAN)', [], null, this.onError); // table creation
                 });
 
                 // get records and insert to new db
                 db.transaction(function (tx) {
-                    tx.executeSql('SELECT * FROM tasks ORDER BY id DESC', [], async function (tx, results) {
+                    tx.executeSql('SELECT * FROM tasks ORDER BY ID DESC', [], async function (tx, results) {
                         let len = results.rows.length, i;
                         if (len > 0) {
                             for (i = 0; i < len; i++) {
                                 const task = results.rows.item(i);
 
                                 await tasks.insert({
-                                    name: task.name,
-                                    project: task.project_name,
-                                    time: taskInterface.sec(task.time),
+                                    name: String(task.name),
+                                    project: String(task.project_name),
+                                    time: parseInt(task.time),
                                     start: new Date(taskInterface.start),
                                     running: parseInt(task.running),
                                     rate: "",
@@ -200,7 +201,11 @@ let taskInterface = {
             const project = $("#form-create input[name='task-project']").val();
 
             if (name.length) {
-                await tasks.insert(name, project);
+                await tasks.insert({
+                    name: name,
+                    project: project
+                });
+
                 $("#form-create")
                     .hide()
                     .find("input:text, textarea")
@@ -219,7 +224,11 @@ let taskInterface = {
                 const project = $("#form-create :input[name='task-project']").val();
 
                 if (name.length) {
-                    await tasks.insert(name, project);
+                    await tasks.insert({
+                        name: name,
+                        project: project
+                    });
+
                     $("#form-create")
                         .hide()
                         .find("input:text, textarea")
@@ -383,7 +392,7 @@ let taskInterface = {
         if (results.length > 0) {
             results.forEach(task => {
                 out += '<div class="item' + (task.running === 1 ? ' running' : '') + '" id="item' + task.id + '" rel="' + task.id + '">';
-                out += '<label class="title">';
+                out += '<label class="title" title="' + task.notes + '">';
                 out += task.name + '<br/>';
                 out += '<small>';
                 out += task.project;
