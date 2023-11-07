@@ -1,6 +1,6 @@
 # Simple Time Tracker
 
-Simple Time Tracker is Google Chrome Extension for time tracking.
+How much time spend on tasks? Start tracking it right now with Simple Time Tracker. Tired of complicated time tracking applications? No need any registration, permissions or unnecessary features. Add a task, start and stop the timer. And that's it 🎉
 
 ## Install Chrome Extension
 
