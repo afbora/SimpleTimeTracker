@@ -141,7 +141,7 @@ textarea:focus {
 }
 
 .form > div {
-    margin-bottom: .75rem;
+    margin-bottom: .5rem;
 }
 
 .form label {
@@ -174,7 +174,7 @@ textarea:focus {
 
 #form-list .item {
     text-align: left;
-    padding: .75rem .5rem;
+    padding: .5rem .25rem;
     position: relative;
     background: #fff;
     display: block;
@@ -209,7 +209,7 @@ textarea:focus {
     right: 2rem;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 18px;
+    font-size: 16px;
 }
 
 #form-list .running {
