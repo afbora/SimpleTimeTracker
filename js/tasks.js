@@ -6,15 +6,14 @@
 // running - task is in progress now
 
 let tasks = {
-    insert: async function (name, project) {
+    insert: async function (item) {
         const task = {
-            name: name,
-            project: project,
             time: 0,
             start: new Date(),
             running: 0,
             rate: "",
-            notes: ""
+            notes: "",
+            ...item
         };
 
         await taskInterface.db.insert({
@@ -25,10 +24,10 @@ let tasks = {
         await taskInterface.reload();
     },
 
-    update: async function (set, where = {}) {
+    update: async function (item, where = {}) {
         const data = {
             in: "tasks",
-            set: set
+            set: item
         };
 
         if (Object.keys(where).length) {
@@ -80,7 +79,7 @@ let taskInterface = {
     intervals: [],
 
     initDb: async function () {
-        let tblTasks = {
+        let tasks = {
             name: "tasks",
             columns: {
                 id: {primaryKey: true, autoIncrement: true},
@@ -94,9 +93,18 @@ let taskInterface = {
             }
         }
 
+        let migration = {
+            name: "migration",
+            columns: {
+                id: {primaryKey: true, autoIncrement: true},
+                date: {dataType: "date_time"}
+            }
+        }
+
         let db = {
             name: "simpleTimeTracker",
-            tables: [tblTasks]
+            tables: [tasks, migration],
+            version: 2
         }
 
         const connection = new JsStore.Connection();
@@ -105,16 +113,76 @@ let taskInterface = {
         this.db = connection;
     },
 
+    /**
+     * @todo Remove migration in v3
+     */
+    migrate: async function () {
+        if (typeof openDatabase === 'function') {
+            let results = await this.db.count({
+                from: "migration"
+            });
+
+            // check migrated before
+            if (results === 0) {
+                // open old db
+                let db = openDatabase('simpletimetracker', '', 'Simple Time tracker database', 2 * 1024 * 1024);
+
+                // create table if not exists
+                db.transaction(function (tx) {
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS tasks(ID INTEGER PRIMARY KEY ASC, project_name TEXT, name TEXT, time INTEGER, start DATETIME, running BOOLEAN)', [], null, this.onError); // table creation
+                });
+
+                // get records and insert to new db
+                db.transaction(function (tx) {
+                    tx.executeSql('SELECT * FROM tasks ORDER BY ID DESC', [], async function (tx, results) {
+                        let len = results.rows.length, i;
+                        if (len > 0) {
+                            for (i = 0; i < len; i++) {
+                                const task = results.rows.item(i);
+
+                                await tasks.insert({
+                                    name: String(task.name),
+                                    project: String(task.project_name),
+                                    time: parseInt(task.time),
+                                    start: new Date(taskInterface.start),
+                                    running: parseInt(task.running),
+                                    rate: "",
+                                    notes: ""
+                                });
+                            }
+                        }
+                    }, this.onError);
+                });
+
+                // drop table
+                db.transaction(function (tx) {
+                    tx.executeSql("DROP TABLE tasks", [], null, this.onError);
+                });
+
+                // add migration date to check
+                await taskInterface.db.insert({
+                    into: "migration",
+                    values: [{date: new Date}]
+                });
+            }
+        }
+    },
+
     reload: async function () {
         await this.index();
         await this.count();
     },
 
-    bind: function () {
+    bind: async function () {
         // cancel buttons click
         $(document).on("click", ".cancel", async function (e) {
             e.preventDefault();
-            $("#" + $(this).attr("rel")).hide().hide().find("input:text").val("");
+            $("#" + $(this).attr("rel"))
+                .hide()
+                .hide()
+                .find("input:text, textarea")
+                .val("");
+            taskInterface.hideError();
             $("#form-list").show();
         });
 
@@ -129,12 +197,19 @@ let taskInterface = {
         $(document).on("click", "#button-create", async function (e) {
             taskInterface.hideError();
 
-            const name = $("#form-create :input[name='task-name']").val();
-            const project = $("#form-create :input[name='task-project']").val();
+            const name = $("#form-create input[name='task-name']").val();
+            const project = $("#form-create input[name='task-project']").val();
 
             if (name.length) {
-                await tasks.insert(name, project);
-                $("#form-create").hide().find("input:text").val("");
+                await tasks.insert({
+                    name: name,
+                    project: project
+                });
+
+                $("#form-create")
+                    .hide()
+                    .find("input:text, textarea")
+                    .val("");
             } else {
                 taskInterface.showError("Task name is required!");
             }
@@ -149,8 +224,15 @@ let taskInterface = {
                 const project = $("#form-create :input[name='task-project']").val();
 
                 if (name.length) {
-                    await tasks.insert(name, project);
-                    $("#form-create").hide().find("input:text").val("");
+                    await tasks.insert({
+                        name: name,
+                        project: project
+                    });
+
+                    $("#form-create")
+                        .hide()
+                        .find("input:text, textarea")
+                        .val("");
                 } else {
                     taskInterface.showError("Task name is required!");
                 }
@@ -310,7 +392,7 @@ let taskInterface = {
         if (results.length > 0) {
             results.forEach(task => {
                 out += '<div class="item' + (task.running === 1 ? ' running' : '') + '" id="item' + task.id + '" rel="' + task.id + '">';
-                out += '<label class="title">';
+                out += '<label class="title" title="' + task.notes + '">';
                 out += task.name + '<br/>';
                 out += '<small>';
                 out += task.project;
@@ -363,7 +445,8 @@ let taskInterface = {
 
     init: async function () {
         await this.initDb();
-        this.bind();
+        await this.migrate();
+        await this.bind();
         await this.index();
         await this.count();
         await this.toggleRunText();
@@ -493,6 +576,10 @@ let taskInterface = {
 
         setTimeout(function () {
             taskInterface.hideError();
-        }, 20000);
+        }, 2000);
+    },
+
+    onError: function onError(tx, error) {
+        alert(error.message);
     }
 };
