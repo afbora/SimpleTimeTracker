@@ -392,6 +392,7 @@ let taskInterface = {
         if (results.length > 0) {
             results.forEach(task => {
                 out += '<div class="item' + (task.running === 1 ? ' running' : '') + '" id="item' + task.id + '" rel="' + task.id + '">';
+                out += '<div class="item-container">';
                 out += '<label class="title" title="' + task.notes + '">';
                 out += task.name + '<br/>';
                 out += '<small>';
@@ -414,6 +415,7 @@ let taskInterface = {
                 }
 
                 out += '<a href="#" class="power play ' + (task.running === 1 ? 'running' : '') + '" title="Timer on/off" rel="' + task.id + '"></a>';
+                out += '</div>';
                 out += '</div>';
 
                 if (task.running === 1) {
