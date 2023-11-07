@@ -8,6 +8,10 @@ https://chrome.google.com/webstore/detail/simple-time-tracker/ifdmgpcchapjlldljf
 
 # CHANGELOG
 
+## 2.1.1
+
+- More compact view
+
 ## 2.1.0
 
 - Added Migration WebSQL to IndexedDB (Origin Trials for WebSQL) and will be removed v3. Up to Chrome 123 (ends with the rollout of next Chrome release), no later than 29 May 2024
