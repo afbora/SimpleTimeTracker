@@ -1,6 +1,5 @@
 {
   "name": "simpletimetracker",
-  "version": "2.1.0",
   "description": "Simple time tracker extension for Google Chrome",
   "keywords": [
     "chrome",

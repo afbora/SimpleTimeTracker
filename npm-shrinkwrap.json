@@ -6,7 +6,6 @@
   "packages": {
     "": {
       "name": "simpletimetracker",
-      "version": "2.0.0",
       "license": "BSD-2-Clause",
       "devDependencies": {
         "gulp": "^4.0.2",
