@@ -7,6 +7,7 @@ let gulp = require("gulp"),
   zip = require("gulp-zip"),
   path = require("path");
 
+// run task: gulp zip
 gulp.task("zip", function () {
   return gulp
     .src(

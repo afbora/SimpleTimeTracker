@@ -8,9 +8,10 @@ https://chrome.google.com/webstore/detail/simple-time-tracker/ifdmgpcchapjlldljf
 
 # CHANGELOG
 
-## 2.1.1
+## 2.2.0
 
 - More compact view
+- Improved default order by tasks
 
 ## 2.1.0
 

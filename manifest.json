@@ -2,7 +2,7 @@
   "name": "Simple Time Tracker",
   "update_url": "https://clients2.google.com/service/update2/crx",
   "description": "How much time spend on tasks? Start tracking it right now with Simple Time Tracker. No need any registration, permissions or unnecessary features. Add a task, start and stop the timer. And that's it!",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "manifest_version": 3,
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"

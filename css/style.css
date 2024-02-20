@@ -275,7 +275,7 @@ textarea:focus {
 ----------------------------------------------------------------------------- */
 
 p.notask label {
-  text-align: center;
+  text-align: center !important;
   padding: 0;
   width: 100%;
 }
