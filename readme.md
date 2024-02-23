@@ -8,6 +8,11 @@ https://chrome.google.com/webstore/detail/simple-time-tracker/ifdmgpcchapjlldljf
 
 # CHANGELOG
 
+## 2.3.0
+
+- Fix reset tasks
+- Added dynamic ordering and sort by option
+
 ## 2.2.0
 
 - More compact view

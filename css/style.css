@@ -245,6 +245,10 @@ textarea:focus {
   padding: .25rem 0;
 }
 
+#form-list .item:hover .item-container  {
+  background-color: #d6fffa;
+}
+
 #form-list .item:not(:last-child) {
   border-bottom: solid 1px #eee;
 }
