@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Time Tracker Application Options</title>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="shortcut icon" type="image/ico" href="stt32x32.png">
+</head>
+<body>
+<div id="holder">
+    <div id="content">
+        <div id="options" class="form">
+            <div class="item">
+                <label>
+                    <input type="checkbox" id="dynamic_tasks" value="1">
+                    Dynamic task ordering
+                </label>
+            </div>
+
+            <div class="item">
+                <label>
+                    Sort by
+                </label>
+                <select id="sort_by">
+                    <option value="id">Id</option>
+                    <option value="name">Name</option>
+                    <option value="project">Project</option>
+                    <option value="start">Start</option>
+                    <option value="time">Time</option>
+                </select>
+            </div>
+
+            <div class="item">
+                <label>
+                    Sort direction
+                </label>
+                <select id="sort_direction">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+            </div>
+
+            <p id="status"></p>
+            <div class="buttons">
+                <input type="button" id="save" value="Save">
+            </div>
+            
+            <div class="copyright">
+                <p>
+                    Developer <a href="https://github.com/afbora" title="Developer Ahmet Bora" target="_blank">@afbora</a>
+                </p>
+                <p>&middot;</p>
+                <p>
+                    Contribute on <a href="https://github.com/afbora/SimpleTimeTracker" target="_blank">GitHub</a>
+                </p>
+                <p>&middot;</p>
+                <p>
+                    <a href="https://market.owebstudio.com/checkout/buy/42165b00-93fe-4dad-aaaa-e8a8b9b7435a" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/options.js"></script>
+</body>
+</html>

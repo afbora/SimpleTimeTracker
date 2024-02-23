@@ -6,6 +6,7 @@
             <zipfileset dir="img" prefix="img"/>
             <zipfileset dir="js" prefix="js"/>
             <zipfileset file="manifest.json"/>
+            <zipfileset file="options.html"/>
             <zipfileset file="popup.html"/>
             <zipfileset file="readme.txt"/>
             <zipfileset file="stt128x128.png"/>

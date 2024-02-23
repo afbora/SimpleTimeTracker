@@ -15,6 +15,7 @@ gulp.task("zip", function () {
         'css/*',
         'js/*',
         'manifest.json',
+        'options.html',
         'popup.html',
         'stt128x128.png',
         'stt32x32.png'

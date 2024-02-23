@@ -3,7 +3,8 @@
 <head>
     <title>Simple Time Tracker Application for Chrome Extension</title>
     <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-    <meta http-equiv="origin-trial" content="AgyH35c/XhMvs0gORM6GUHms0idFY/G4UkZpXLrgcDR0YOvw6wRAp46mF+H56szvV60aGG+tdrGzW1JuY2D3MgoAAABneyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vaWZkbWdwY2NoYXBqbGxkbGpmZWdmZG5vamFpZWFjbW4iLCJmZWF0dXJlIjoiV2ViU1FMIiwiZXhwaXJ5IjoxNzE2OTQwNzk5fQ==">
+    <meta http-equiv="origin-trial"
+          content="AgyH35c/XhMvs0gORM6GUHms0idFY/G4UkZpXLrgcDR0YOvw6wRAp46mF+H56szvV60aGG+tdrGzW1JuY2D3MgoAAABneyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vaWZkbWdwY2NoYXBqbGxkbGpmZWdmZG5vamFpZWFjbW4iLCJmZWF0dXJlIjoiV2ViU1FMIiwiZXhwaXJ5IjoxNzE2OTQwNzk5fQ==">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="shortcut icon" type="image/ico" href="stt32x32.png">
 </head>
@@ -11,9 +12,10 @@
 <div id="holder">
     <div id="bar">
         <a href="javascript:void(0)" class="create button"><span></span> New</a>
+        <a href="javascript:void(0)" class="export-all button"><span></span> Export All</a>
+        <a href="javascript:void(0)" class="options button" title="Options"><span></span> &#9881;</a>
         <a href="javascript:void(0)" class="reset-all button"><span></span> Reset All</a>
         <a href="javascript:void(0)" class="remove-all button"><span></span> Delete All</a>
-        <a href="javascript:void(0)" class="export-all button"><span></span> Export All</a>
     </div>
     <div id="content">
         <div id="form-list"></div>
@@ -88,8 +90,7 @@
         </div>
     </div>
     <div id="footer">
-        Developer <a href="https://github.com/afbora" title="Developer, Ahmet Bora" target="_blank">@afbora</a> | v<span
-            id="version"></span>
+        Version <span id="version"></span>
         <span id="total-time">Total: <span id="total-time-counter"></span></span>
     </div>
 </div>
