@@ -1,4 +1,4 @@
-[*.{css,scss,less,js,json,ts,sass,html,hbs,mustache,phtml,html.twig,md,yml}]
+[*.{css,scss,less,js,json,ts,sass}]
 charset = utf-8
 indent_style = space
 indent_size = 2
@@ -7,7 +7,7 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 max_line_length = 200
 
-[*.md]
+[*.{html,hbs,mustache,phtml,html.twig,md,yml}]
 indent_size = 4
 trim_trailing_whitespace = false
 

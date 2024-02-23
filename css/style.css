@@ -10,7 +10,7 @@ body {
   padding: 0;
   margin: 0 auto;
   background: #fff;
-  overflow: scroll;
+  overflow-y: auto;
 }
 
 a {
@@ -39,6 +39,12 @@ a {
 
 #bar .remove-all {
   float: right !important;
+}
+
+#bar .options {
+  float: right !important;
+  margin-left: 5px;
+  font-size: 1.25rem;
 }
 
 #bar .create {
@@ -148,6 +154,7 @@ p.buttons {
 ----------------------------------------------------------------------------- */
 
 input[type=text],
+select,
 textarea {
   border: solid 1px #D6D6BE;
   background-color: #fcfff4;
@@ -161,6 +168,7 @@ textarea {
 }
 
 input[type=text]:focus,
+select:focus,
 textarea:focus {
   border: solid 1px #fff286;
   background-color: #fff;
@@ -193,6 +201,20 @@ textarea:focus {
 #form-list label small,
 .form label small {
   font-size: 10px !important;
+}
+
+/* options
+----------------------------------------------------------------------------- */
+
+#options {
+  min-height: 20rem;
+}
+
+.copyright {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  gap: 0.25rem;
 }
 
 /* content

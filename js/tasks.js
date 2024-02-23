@@ -65,6 +65,7 @@ let tasks = {
     await this.update(
       {
         time: 0,
+        start: new Date()
       },
       {
         id: parseInt(id)
@@ -76,6 +77,7 @@ let tasks = {
 
 let taskInterface = {
   db: null,
+  options: null,
   intervals: [],
 
   initDb: async function () {
@@ -171,6 +173,29 @@ let taskInterface = {
   reload: async function () {
     await this.index();
     await this.count();
+  },
+
+  settings: async function () {
+    if (!this.options) {
+      const self = this;
+      return new Promise((resolve, reject) => {
+        try {
+          chrome.storage.local.get(
+            {
+              dynamic_tasks: false,
+              sort_by: "id",
+              sort_direction: "asc"
+            },
+            (items) => {
+              self.options = items;
+              resolve(items);
+            }
+          );
+        } catch (ex) {
+          reject(ex);
+        }
+      });
+    }
   },
 
   bind: async function () {
@@ -269,7 +294,7 @@ let taskInterface = {
       await tasks.removeAll()
     });
 
-    // remove all tasks
+    // reset all tasks
     $(document).on("click", ".reset-all", async function (e) {
       e.preventDefault();
       $("#form-list").hide();
@@ -382,21 +407,44 @@ let taskInterface = {
       await taskInterface.reload();
 
     });
+
+    // options modal
+    $(document).on("click", ".options", async function (e) {
+      if (chrome.runtime.openOptionsPage) {
+        chrome.runtime.openOptionsPage();
+      } else {
+        window.open(chrome.runtime.getURL('options.html'));
+      }
+    });
   },
 
   index: async function () {
+    let order = [];
+    console.log(this.options);
+    if (this.options?.dynamic_tasks) {
+      order.push({
+        by: "running",
+        type: "desc"
+      });
+    }
+
+    if (this.options?.sort_by && this.options?.sort_direction) {
+      order.push({
+        by: this.options.sort_by,
+        type: this.options.sort_direction
+      });
+    }
+
+    if (order.length === 0) {
+      order.push({
+        by: "id",
+        type: "asc"
+      });
+    }
+
     let results = await taskInterface.db.select({
       from: "tasks",
-      order: [
-        {
-          by: "running",
-          type: "desc"
-        },
-        {
-          by: "start",
-          type: "desc"
-        }
-      ]
+      order: order
     });
 
     let out = "";
@@ -461,6 +509,7 @@ let taskInterface = {
     await this.initDb();
     await this.migrate();
     await this.bind();
+    await this.settings();
     await this.index();
     await this.count();
     await this.toggleRunText();

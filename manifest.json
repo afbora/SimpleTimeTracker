@@ -2,14 +2,21 @@
   "name": "Simple Time Tracker",
   "update_url": "https://clients2.google.com/service/update2/crx",
   "description": "Start tracking it right now with Simple Time Tracker. No need any registration, permissions or unnecessary features.",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "manifest_version": 3,
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
   },
   "icons": {
     "128": "stt128x128.png"
   },
+  "permissions": [
+    "storage"
+  ],
   "action": {
     "default_title": "Simple Time Tracker",
     "default_icon": "stt32x32.png",
